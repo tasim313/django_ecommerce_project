@@ -69,12 +69,14 @@ class Profile(models.Model):
         return self.username + " 'S Profile"
 
     def is_fully_filled(self):
-        fields_name = [f.name for f in self._meta.get_fields()]
-        for field_name in fields_name:
+        fields_names = [f.name for f in self._meta.get_fields()]
+
+        for field_name in fields_names:
             value = getattr(self, field_name)
             if value is None or value == '':
                 return False
-            return True
+        return True
+
 
 
 @receiver(post_save, sender=User)

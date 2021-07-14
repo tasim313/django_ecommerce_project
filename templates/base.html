@@ -9,9 +9,73 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <title>{% block title_block %}Ecommerce Site{% endblock %}</title>
+     <style>
+          .card {
+            height: 350px;
+          }
+
+          .card-product:after {
+            content: "";
+            display: table;
+            clear: both;
+            visibility: hidden;
+          }
+          .card-product .price-new, .card-product .price {
+            margin-right: 5px;
+          }
+
+          .card-product .price-old {
+            color: #999;
+          }
+
+          .card-product .img-wrap {
+            border-radius: 3px 3px 0 0;
+            overflow: hidden;
+            position: relative;
+            height: 220px;
+            text-align: center;
+          }
+
+          .card-product .img-wrap img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: cover;
+          }
+
+          .card-product .info-wrap {
+            overflow: hidden;
+            padding: 15px;
+            border-top: 1px solid #eee;
+          }
+
+          .card-product .action-wrap {
+            padding-top: 4px;
+            margin-top: 4px;
+          }
+
+          .card-product .bottom-wrap {
+            padding: 15px;
+            border-top: 1px solid #eee;
+          }
+
+          .card-product .title {
+            margin-top: 0px;
+          }
+     </style>
 </head>
 <body>
-<div class="container">
+{% include 'navbar.html' %}
+<div class="container" style="padding-top:10px">
+   <div class="messages container mt-2">
+       {% if messages %}
+           {% for message in messages %}
+               <div {% if message.tags %} class="alert alert -{{ message.tag }}" {% endif %} role="alert">
+                    {{ message }}
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               </div>
+           {% endfor %}
+       {% endif %}
+   </div>
     {% block body_block %} {% endblock %}
 </div>
 
